@@ -30,7 +30,6 @@ export class ReservationService {
   addReservation(reservation: Reservation): void {
     this.reservations.push(reservation);
     localStorage.setItem('reservations', JSON.stringify(this.reservations));
-    console.log("Added reservation: ", reservation);
   }
 
   updateReservation(updatedReservation: Reservation): void {
