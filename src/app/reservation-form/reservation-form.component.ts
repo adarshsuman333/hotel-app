@@ -16,13 +16,7 @@ export class ReservationFormComponent implements OnInit {
     private reservationService: ReservationService, 
     private router: Router, 
     private activatedRoute: ActivatedRoute) {
-      this.reservationForm = this.formBuilder.group({
-      guestName: ['', Validators.required],
-      guestEmail: ['', [Validators.required, Validators.email]],
-      checkInDate: ['', Validators.required],
-      checkOutDate: ['', Validators.required],
-      roomNumber: ['', Validators.required]
-    });
+      
   }
 
   ngOnInit() {
