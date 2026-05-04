@@ -28,6 +28,7 @@ export class ReservationService {
   }
 
   addReservation(reservation: Reservation): void {
+    reservation.id = Date.now().toString(); // Generate a unique ID based on timestamp
     this.reservations.push(reservation);
     localStorage.setItem('reservations', JSON.stringify(this.reservations));
   }
