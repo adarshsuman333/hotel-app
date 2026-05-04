@@ -9,6 +9,14 @@ export class ReservationService {
 
   private reservations: Reservation[] = [];
 
+  //Constructor is getting loaded before ngOnInit, so we can load reservations from localStorage here
+
+  constructor() {
+    // Load reservations from localStorage if available
+    let savedReservations = localStorage.getItem('reservations');
+    this.reservations = savedReservations ? JSON.parse(savedReservations) : [];
+  }
+
   //CRUD operations
 
   getReservations(): Reservation[] {
@@ -21,13 +29,15 @@ export class ReservationService {
 
   addReservation(reservation: Reservation): void {
     this.reservations.push(reservation);
-    console.log("Added reservation: ", this.reservations);
+    localStorage.setItem('reservations', JSON.stringify(this.reservations));
+    console.log("Added reservation: ", reservation);
   }
 
   updateReservation(updatedReservation: Reservation): void {
     let index = this.reservations.findIndex(res => res.id === updatedReservation.id);
     if (index >= 0 && index < this.reservations.length) {
       this.reservations[index] = updatedReservation;
+      localStorage.setItem('reservations', JSON.stringify(this.reservations));
       console.log("Updated reservation: ", updatedReservation);
     }
   }
@@ -36,6 +46,7 @@ export class ReservationService {
     let index = this.reservations.findIndex(res => res.id === id);
     if (index >= 0 && index < this.reservations.length) {
       this.reservations.splice(index, 1);
+      localStorage.setItem('reservations', JSON.stringify(this.reservations));
       console.log("Deleted reservation with ID: ", id);
     }
   }
